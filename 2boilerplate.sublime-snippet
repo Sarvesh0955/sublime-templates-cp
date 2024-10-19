@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define ld long double
+#define pb push_back
+#define yes "YES\n"
+#define no "NO\n"
+#define ff first
+#define ss second
+#define sz size()
+#define vl vector<ll>
+#define all(v) (v).begin(),(v).end()
+const ll MOD = 1e9+7;
+
+void solve()
+{
+	$1 
+}
+
+
+int main()
+{
+	int T=1;
+    cin>>T;
+    while(T--){
+    	solve();
+    }
+	return 0;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>2boilerplate</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
+

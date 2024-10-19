@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+vl pf(n+1,0);
+for(ll i=0;i<n;i++){
+    pf[i+1] = pf[i] + a[i]; 
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>pf</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

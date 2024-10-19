@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+ll n,m;
+cin>>n>>m;
+vvl g(n+1);
+for(ll i=0;i<m;i++){
+    ll u,v;
+    cin>>u>>v;
+    g[u].pb(v);
+    g[v].pb(u);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>graph</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,63 @@
+<snippet>
+	<content><![CDATA[
+void dfs(ll i,vvl &g,vb &vis,vl &v){
+    vis[i] = 1;
+    for(auto val : g[i]){
+        if(!vis[val]){
+            dfs(val,g,vis,v);
+        }
+    }
+    v.pb(i);
+}
+
+vl topo_sort(vvl &g){
+    ll n = sz(g)-1;
+    vl v;
+    vb vis(n+1,0);
+    for(ll i=1;i<=n;i++){
+        if(!vis[i]){
+            dfs(i,g,vis,v);
+        }
+    }
+    reverse(all(v));
+    return v;
+}
+
+void dfs2(ll i,vvl &g,vb &vis,vl &v){
+    v.pb(i);
+    vis[i] = 1;
+    for(auto val : g[i]){
+        if(!vis[val]){
+            dfs2(val,g,vis,v);
+        }
+    }
+}
+
+vvl scc(vvl &g){
+    ll n=sz(g)-1;
+    vl v = topo_sort(g);
+
+    vvl adg_g(n+1);
+    for(ll i=1;i<=n;i++){
+        for(auto val : g[i]){
+            adg_g[val].pb(i);
+        }
+    }
+
+    vb vis(n+1,0);
+    vvl comp;
+    for(ll i=0;i<n;i++){
+        if(!vis[v[i]]){
+            vl v;
+            dfs2(v[i],adg_g,vis,v);
+            comp.pb(v);
+        }
+    }
+    return comp;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>scc1_kosaraju</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

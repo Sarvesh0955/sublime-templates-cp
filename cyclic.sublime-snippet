@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+bool cyclic(vl a) {
+    ll inv = 0;
+    ll n=sz(a);
+    for(ll i=0;i<n-1;i++){
+        if(a[i]>a[i+1]){
+            inv++;
+        }
+    }
+    if(inv==0){
+        return true;
+    }
+    if(inv==1 && a[n-1]<a[0]){
+        return true;
+    }
+    return false;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cyclic</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+void dfs(ll i,vvl &g,vb &vis){
+    vis[i] = 1;
+    for(auto val : g[i]){
+        if(!vis[val]){
+            dfs(val,g,vis);
+        }
+    }
+}
+
+bool connected(vvl g){
+    ll n = sz(g)-1;
+    vb vis(n+1,0);
+    dfs(1ll,g,vis);
+    for(ll i=1;i<=n;i++){
+        if(!vis[i]){
+            return false;
+        }
+    }
+    return true;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>connected</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

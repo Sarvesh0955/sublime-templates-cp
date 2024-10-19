@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+const ll PMAX=1e6+10;
+vl hp(PMAX,0);
+void primeseive()
+{
+    for(ll i=2;i<PMAX;i++){
+        if(hp[i]==0){             
+            for(ll j=i;j<PMAX;j+=i){
+                hp[j] = i;
+            }
+        }
+    }
+}
+ 
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>seivehp</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

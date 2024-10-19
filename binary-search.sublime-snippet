@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+ll l=1,r=1;
+while(good()){
+    r*=2;
+}
+while(r-l>1){
+    ll m = l+(r-l)/2;
+    if(good()){
+        r = m;
+    }
+    else{
+        l = m+1;
+    }
+}
+if(good()){
+    cout<<l<<endl;
+}
+else{
+    cout<<r<<endl;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>binary_search</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

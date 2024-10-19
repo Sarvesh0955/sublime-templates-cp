@@ -1,0 +1,41 @@
+<snippet>
+	<content><![CDATA[
+ll timer = 0;
+void dfs(ll i,ll par,vb &vis,vvl &g,vl &in,vl &low){
+    vis[i] = 1;
+    in[i] = low[i] = timer++;
+    for(auto node : g[i]){
+        if(node == par) continue;
+        if(!vis[node]){
+            dfs(node,i,vis,g,in,low);
+            low[i] = min(low[i], low[node]);
+
+            if(in[i] < low[node]){
+                cout<<i<<" "<<node<<endl;
+            }
+        } 
+        else{
+            low[i] = min(low[i], in[node]);
+        }
+    }
+
+    
+}
+
+void bridge(vvl &g) {
+    timer = 0;
+    ll n =sz(g)-1;
+    vl in(n+1,-1),low(n+1,-1);
+    vb vis(n+1,0);
+    for(ll i=1;i<=n;i++) {
+        if(!vis[i]){
+            dfs(i,-1,vis,g,in,low);
+        }
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>bridge</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

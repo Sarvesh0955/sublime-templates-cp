@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+void dijkstra(ll st,vvpl &g){
+    ll n = sz(g)-1;
+    vl dis(n+1,INF);
+    vl par(n+1,-1);
+    set<pl> s;
+    dis[st] = 0;
+    s.insert({dis[st],st});
+    while(!s.empty()){
+        ll v = (*s.begin()).ss;
+        s.erase(s.begin());
+
+        for(auto val : g[v]){
+            ll w = val.ss;
+            ll to = val.ff;
+
+            if(dis[v]+w < dis[to]){
+                s.erase({dis[to],to});
+                dis[to] = dis[v]+w;
+                par[to] = v;
+                s.insert({dis[to],to});
+            }
+        }
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dijkstra</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

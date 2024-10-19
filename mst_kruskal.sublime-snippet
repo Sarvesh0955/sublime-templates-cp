@@ -1,0 +1,56 @@
+<snippet>
+	<content><![CDATA[
+const ll N= 2e5 + 10;
+ll parent[N];
+ll sizee[N];
+
+void make_set(ll v){
+    parent[v] = v;
+    sizee[v] = 1;
+}
+
+ll find_set(ll v) {
+    if (v == parent[v])
+        return v;
+    return parent[v] = find_set(parent[v]);
+}
+
+void union_sets(ll a,ll b){
+    a = find_set(a);
+    b = find_set(b);
+    if (a != b){
+        if (sizee[a] < sizee[b])
+            swap(a, b);
+        parent[b] = a;
+        sizee[a] += sizee[b];
+    }
+}
+
+struct Edge {
+    ll u, v, weight;
+    bool operator<(Edge const& other) {
+        return weight < other.weight;
+    }
+};
+
+void kruskal(ll n,vector<Edge> &edges){
+    ll cost = 0;
+    vector<Edge> result;
+    for(ll i=1;i<=n;i++){
+        make_set(i);
+    }
+    sort(all(edges));
+    for(Edge e : edges){
+        if(find_set(e.u)!=find_set(e.v)){
+            cost += e.weight;
+            result.push_back(e);
+            union_sets(e.u, e.v);
+        }
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>mst</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

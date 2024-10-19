@@ -1,0 +1,55 @@
+<snippet>
+	<content><![CDATA[
+
+ll timer = 0;
+void dfs(ll i,vb &vis,vvl &g,vl &in,vl &low,stack<ll> &s,
+    vb &in_stack,vvl &comp){
+    vis[i] = 1;
+    in[i] = low[i] = timer++;
+    s.push(i);
+    in_stack[i] = 1;
+
+    for(auto node : g[i]){
+        if(!vis[node]){
+            dfs(node,vis,g,in,low,s,in_stack,comp);
+            low[i] = min(low[i], low[node]);
+        } 
+        else if(in_stack[node]){
+            low[i] = min(low[i], in[node]);
+        }
+    }
+
+    if(low[i] == in[i]){
+        vl v;
+        while(s.top()!=i){
+            v.pb(s.top());
+            in_stack[s.top()]=0;
+            s.pop();
+        }
+        v.pb(s.top());
+        in_stack[s.top()]=0;
+        s.pop();
+        comp.pb(v); 
+    }
+}
+
+vvl scc(vvl &g) {
+    ll n =sz(g)-1;
+    stack<ll> s;
+    vl in(n+1),low(n+1);
+    vb vis(n+1,0),in_stack(n+1,0);
+    vvl comp;
+
+    for(ll i=1;i<=n;i++) {
+        if(!vis[i]){
+            dfs(i,vis,g,in,low,s,in_stack,comp);
+        }
+    }
+    return comp;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>scc2_tarjans</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

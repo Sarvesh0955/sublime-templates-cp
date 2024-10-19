@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+void primeseive();const ll PMAX=1e6+10;
+vector<bool> isPrime(PMAX,1);vl prime;
+void primeseive()
+{
+   isPrime[0]=isPrime[1]=0;
+   for(ll i=2;i<PMAX;i++)
+       if(isPrime[i]==true)                
+             for(ll j=2*i;j<PMAX;j+=i)
+               isPrime[j]=false;
+   //for(ll i=2;i<PMAX;i++)
+   //    if(isPrime[i])
+   //         prime.pb(i);
+}
+$1
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>seive</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

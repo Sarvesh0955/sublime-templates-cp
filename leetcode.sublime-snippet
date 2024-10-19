@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+#define ll long long int
+#define ull unsigned long long int
+#define ld long double
+#define pb push_back
+#define yes "YES\n"
+#define no "NO\n"
+#define umap unordered_map
+#define uset unordered_set
+#define endl "\n"
+#define ff first
+#define ss second
+#define sz size()
+#define vl vector<ll>
+#define pl pair<ll,ll>
+#define vpl vector<pair<ll,ll>>
+#define all(v) (v).begin(),(v).end()
+#define bsort(v) sort(all(v),greater<int>())
+#define setcount(x) __builtin_popcountll(x)
+#define pi 3.141592653589793238462643
+const ll INF = 1e18;
+const ll MOD = 1e9+7;
+const ld expp = 1e-9;
+// ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>leetcode</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
+

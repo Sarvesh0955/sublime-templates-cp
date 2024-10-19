@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+ll n,m;
+cin>>n>>m;
+vvpl g(n+1);
+for(ll i=0;i<m;i++){
+    ll u,v,w;
+    cin>>u>>v>>w;
+    g[u].pb({v,w});
+    g[v].pb({u,w});
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>wgraph</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

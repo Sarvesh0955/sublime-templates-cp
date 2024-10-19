@@ -1,0 +1,41 @@
+<snippet>
+	<content><![CDATA[
+bool spfa(ll i,vvpl &g){
+    int n = sz(g)-1;
+    vl d(n+1,INF);
+    vl cnt(n+1, 0);
+    vb inqueue(n+1, false);
+    queue<ll> q;
+
+    d[i] = 0;
+    q.push(i);
+    inqueue[i] = true;
+    while(!q.empty()){
+        ll v = q.front();
+        q.pop();
+        inqueue[v] = false;
+        for(auto val : g[v]){
+            ll to = val.ff;
+            ll w = val.ss;
+            if(d[v]+w<d[to]){
+                d[to] = d[v] + w;
+                if(!inqueue[to]){
+                    q.push(to);
+                    inqueue[to] = true;
+                    cnt[to]++;
+                    if(cnt[to]>n){
+                        return false;  
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>spfa</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

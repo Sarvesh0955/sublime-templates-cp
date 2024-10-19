@@ -1,0 +1,34 @@
+<snippet>
+	<content><![CDATA[
+const ll N= 2e5 + 10;
+ll parent[N];
+ll sizee[N];
+
+void make_set(ll v){
+    parent[v] = v;
+    sizee[v] = 1;
+}
+
+ll find_set(ll v) {
+    if (v == parent[v])
+        return v;
+    return parent[v] = find_set(parent[v]);
+}
+
+void union_sets(ll a,ll b){
+    a = find_set(a);
+    b = find_set(b);
+    if (a != b){
+        if (sizee[a] < sizee[b])
+            swap(a, b);
+        parent[b] = a;
+        sizee[a] += sizee[b];
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dsu</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
+
