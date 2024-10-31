@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+//a = succ(x);
+//b = succ(succ(x));
+//while (a != b) {
+//	a = succ(a);
+//	b = succ(succ(b));
+//}
+//if both x and b are inside cycle then infinite loop
+//a = x;
+//while (a != b) {
+//	a = succ(a);
+//	b = succ(b);
+//}
+//first = a;
+//b = succ(a);
+//length = 1;
+//while (a != b) {
+//b = succ(b);
+//length++;
+//}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>succ_cycle</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

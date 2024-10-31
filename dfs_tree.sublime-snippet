@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+void dfs(ll i,ll par,vvl &g){
+    for(auto val : g[i]){
+        if(val==par) continue;
+        dfs(val,i,g);
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dfs_tree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,56 @@
+<snippet>
+	<content><![CDATA[
+void euler(ll u,vvl &g,vvl &edg,vb &mark,vl &deg,vl &path){
+    while(deg[u]!=0){
+        ll i = --deg[u];
+        ll v = g[u][i];
+        ll ed = edg[u][i];
+
+        if(!mark[ed]){
+            mark[ed] = 1;
+            euler(v,g,edg,mark,deg,path);
+        }
+    }
+    path.pb(u);
+}
+
+vl eulerPath(ll n,vpl &edges){
+    ll m=sz(edges);
+    vvl g(n+1);
+    vvl edg(n+1);
+    for(ll i=0;i<m;i++){
+        edg[edges[i].ff].pb(i);
+        edg[edges[i].ss].pb(i);
+        g[edges[i].ff].pb(edges[i].ss);
+        g[edges[i].ss].pb(edges[i].ff);
+    }
+
+    vl deg(n+1,0);
+    for(ll u=1;u<=n;u++){
+        for(auto v : g[u]){
+            deg[u]++;
+            deg[v]++;
+        }
+    }
+
+    for(ll i=1;i<=n;i++){
+        deg[i] /= 2;
+        if(deg[i]&1)
+            return {-1};
+    }
+
+    vl path;
+    vb mark(m,0);
+    euler(1,g,edg,mark,deg,path);
+    if(sz(path) != m+1) 
+        return {-1};
+    reverse(all(path));
+    return path;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>euler_undirected</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

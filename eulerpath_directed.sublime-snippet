@@ -1,0 +1,52 @@
+<snippet>
+	<content><![CDATA[
+void euler(ll i,vvl &g,vl &out,vl &path){
+    while(out[i]!=0){
+        ll u=g[i][--out[i]];
+        euler(u,g,out,path);
+    }
+    path.pb(i);
+}
+
+vl eulerPathDirected(vvl &g){
+    ll n = sz(g)-1;
+    vl in(n+1,0);
+    vl out(n+1,0);
+    ll m=0;
+
+    for(ll u=1;u<=n;u++){
+        for(auto v : g[u]){
+            in[v]++;
+            out[u]++;
+            m++;
+        }
+    }
+
+    ll st_ct=0,end_ct=0;
+    ll node;
+    for(ll i=1;i<=n;i++){
+        if(out[i]-in[i]>1 || in[i]-out[i]>1)
+            return {-1};
+        else if(in[i]>out[i])
+            end_ct++;
+        else if(out[i]>in[i]){
+            node = i;
+            st_ct++;
+        }
+    }
+    if(!((st_ct==0 && end_ct==0) || (st_ct==1 && end_ct==1)))
+        return {-1};
+    vl path;
+    euler(node,g,out,path);
+    if(sz(path) != m+1) 
+        return {-1};
+    reverse(all(path));
+    return path;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>euler_directed</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
