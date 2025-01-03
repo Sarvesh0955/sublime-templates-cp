@@ -1,0 +1,19 @@
+<snippet>
+	<content><![CDATA[
+size_t pair_hash(ll x,ll y) {
+    x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
+    y = (y ^ (y >> 30)) * 0x94d049bb133111ebULL;
+
+    uint64_t combined = x ^ y;
+    
+    combined = (combined ^ (combined >> 31)) * 0xff51afd7ed558ccdULL;
+    combined = combined ^ (combined >> 33);
+
+    return static_cast<size_t>(combined);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>pair_hash</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,67 @@
+<snippet>
+	<content><![CDATA[
+struct SegmentTree {
+    ll size;
+    vl arr;
+
+    SegmentTree(ll n){
+        size = 1;
+        while(size < n){
+            size *= 2;
+        }
+        arr.assign(2 * size ,0);
+    }
+
+    void build(vl &a,ll node,ll lx,ll rx){
+        if(rx-lx==1){
+            if(lx < sz(a)){
+                arr[node] = a[lx];
+            }
+            return;
+        }
+        ll m = (lx+rx)/2;
+        build(a,2*node+1,lx,m);
+        build(a,2*node+2,m,rx);
+        arr[node] = arr[node*2+1] + arr[node*2+2];
+    }
+
+    void build(vl &a){
+        build(a,0,0,size);
+    }
+
+    void set(ll i,ll val,ll node,ll lx,ll rx){
+        if(rx-lx==1){
+            arr[node] = val;
+            return;
+        }
+        ll m = (lx+rx)/2;
+        if(i<m){
+            set(i,val,2*node+1,lx,m);
+        }
+        else{
+            set(i,val,2*node+2,m,rx);
+        }
+        arr[node] = arr[2*node+1] + arr[2*node+2];
+    }
+
+    void set(ll i,ll val){
+        set(i,val,0,0,size);
+    }
+
+    ll range(ll l,ll r,ll node,ll lx,ll rx){
+        if(lx>r || rx-1<l) return 0;
+        if(l<=lx && rx-1<=r) return arr[node];
+        ll m = (lx+rx)/2;
+        return range(l,r,2*node+1,lx,m)+range(l,r,2*node+2,m,rx);
+    }
+
+    ll range(ll l,ll r){
+        return range(l,r,0,0,size);
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>segment_tree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -12,11 +12,15 @@ ll power(ll a,ll b,ll mod){
     return ans;
 }
 
-ll divide(ll a,ll b,ll mod){
-    return ((a%mod) * (power(b%mod,mod-2,mod)%mod))%mod ;
+ll inv(ll b,ll mod){
+    return (power(b%mod,mod-2,mod)%mod);
 }
 
-ll multiply(ll a,ll b,ll mod){
+ll div(ll a,ll b,ll mod){
+    return ((a%mod) * inv(b,mod))%mod ;
+}
+
+ll mul(ll a,ll b,ll mod){
     return ((a%mod) * (b%mod))%mod;
 }
 
@@ -24,7 +28,7 @@ ll add(ll a,ll b,ll mod){
     return ((a%mod) + (b%mod))%mod;
 }
 
-ll subtract(ll a,ll b,ll mod){
+ll sub(ll a,ll b,ll mod){
     return ((a%mod) - (b%mod) + mod)%mod;
 }
 

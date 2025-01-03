@@ -1,0 +1,31 @@
+<snippet>
+	<content><![CDATA[
+const ll PMAX=1e6+10;
+vl hp(PMAX,0);
+void primeseive() {
+    for(ll i=2;i<PMAX;i++){
+        if(hp[i]==0){             
+            for(ll j=i;j<PMAX;j+=i){
+                hp[j] = i;
+            }
+        }
+    }
+}
+ 
+vl factors(ll x) {
+    vl ret;
+    ll last=-1;
+    while (x != 1){
+        if(hp[x]!=last)
+        ret.pb(hp[x]);
+        last=hp[x];
+        x = x / hp[x];
+    }
+    return ret;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>fact</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

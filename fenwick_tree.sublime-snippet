@@ -1,0 +1,41 @@
+<snippet>
+	<content><![CDATA[
+struct FenwickTree {
+    ll n;
+    vl bit;
+
+    FenwickTree(ll n){
+        this->n = n+1;
+        bit.assign(n+1,0);
+    }
+
+    FenwickTree(vl &a) : FenwickTree(sz(a)) {
+        for(ll i=0;i<sz(a);i++){
+            add(i,a[i]);
+        }
+    }
+
+    void add(ll i,ll val){
+        for(++i;i<n;i+=(i&-i)){
+            bit[i] += val;
+        }
+    }
+
+    ll sum(ll i){
+        ll tot=0;
+        for(++i;i>0;i-=(i&-i)){
+            tot += bit[i];
+        }
+        return tot;
+    }
+
+    ll sum(ll l,ll r){
+        return sum(r) - sum(l-1);
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>fenwick_tree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

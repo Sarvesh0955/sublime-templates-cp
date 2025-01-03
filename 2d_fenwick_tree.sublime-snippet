@@ -1,0 +1,49 @@
+<snippet>
+	<content><![CDATA[
+struct FenwickTree2D {
+    vvl bit;
+    ll n, m;
+
+    FenwickTree2D(ll rows, ll cols) {
+        n = rows + 1;
+        m = cols + 1;
+        bit.assign(n, vector<ll>(m, 0));
+    }
+
+    FenwickTree2D(vvl& a) : FenwickTree2D(a.size(),a[0].size()){
+        for(ll i=0;i<sz(a);i++){
+            for(ll j=0;j<sz(a[0]);j++){
+                add(i, j, a[i][j]);
+            }
+        }
+    }
+
+    void add(ll x, ll y, ll delta){
+        for(ll i=x+1;i<n;i+=(i&-i)){
+            for(ll j=y+1;j<m;j+=(j&-j)){
+                bit[i][j] += delta;
+            }
+        }
+    }
+
+    ll sum(ll x, ll y){
+        ll ret = 0;
+        for(ll i=x+1;i>0;i-=(i&-i)){
+            for(ll j=y+1;j>0;j-=(j&-j)){
+                ret += bit[i][j];
+            }
+        }
+        return ret;
+    }
+
+    ll sum(ll x1, ll y1, ll x2, ll y2){
+        return sum(x2, y2)-sum(x1 - 1, y2)
+                -sum(x2, y1 - 1)+sum(x1 - 1, y1 - 1);
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>2d_fenwick_tree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

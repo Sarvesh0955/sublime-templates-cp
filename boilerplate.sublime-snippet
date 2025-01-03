@@ -16,21 +16,21 @@ using namespace std;
 #define ff first
 #define ss second
 #define sz(x) ((long long)(x).size())
+#define pl pair<ll,ll>
 #define mapl map<ll,ll>
 #define mapb map<ll,bool>
 #define mapc map<char,ll>
 #define mapv map<ll,vl>
 #define vl vector<ll>
 #define vvl vector<vl>
+#define vpl vector<pair<ll,ll>>
 #define vvpl vector<vpl>
 #define vb vector<bool>
 #define vvb vector<vb>
 #define vc vector<char>
 #define vvc vector<vc>
-#define pl pair<ll,ll>
-#define vpl vector<pair<ll,ll>>
 #define max_heap priority_queue<ll> //push pop
-#define min_heap priority_queue<ll,vl,greater<int>>
+#define min_heap priority_queue<ll,vl,greater<ll>>
 #define all(v) (v).begin(),(v).end()
 #define bsort(v) sort(all(v),greater<int>())
 #define bitcount(x) __builtin_popcountll(x)
@@ -43,60 +43,30 @@ const ll MOD = 1e9+7;
 const ld expp = 1e-7;
 void make_unique(vl &a){sort(all(a));a.resize(unique(all(a)) - a.begin());}
 
-void print(ll t) {cout<<t;}
-void print(int t) {cout<<t;}
-void print(string t) {cout<<t;}
-void print(char t) {cout<<t;}
-void print(ld t) {cout<<t;}
-void print(double t) {cout<<t;}
-void print(ull t) {cout<<t;}
-
-template <class T, class V> void print(pair<T, V> p);
-template <class T> void print(vector<T> v);
-template <class T> void print(set<T> v);
-template <class T> void print(multiset<T> v);
-template <class T, class V> void print(map<T, V> v);
-
-template <class T, class V> void print(pair<T, V> p) 
-{print(p.ff);cout<<"-";print(p.ss);cout<<" ";}
-template <class T> void print(vector<T> v) 
-{for(T i : v){print(i);cout<<" ";}cout<<endl;}
-template <class T> void print(set<T> v) 
-{cout<<"[ ";for(T i : v){print(i);cout<<" ";}cout<<"]";}
-template <class T> void print(multiset<T> v) 
-{cout<<"[ ";for(T i : v){print(i);cout<<" ";}cout<<"]";}
-template <class T, class V> void print(map<T, V> v) 
-{for(auto i : v){print(i);}}
+#ifndef ONLINE_JUDGE
+#include "./template.cpp"
+#else
+#define debug(...)
+#define debugArr(...)
+#endif
 
 void solve()
 {
-	$1
+    $1
 }
 
 
 int main()
 {
-	ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-	#ifndef ONLINE_JUDGE
-    	auto start_time = chrono::steady_clock::now();
-    #endif
-
-
-	int T=1;
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    
+    int T=1;
     cin>>T;
     while(T--)
-    	solve();
+        solve();
 
-
-	#ifndef ONLINE_JUDGE
-	    auto end_time = chrono::steady_clock::now();
-	    auto diff_time = end_time - start_time;
-	    cerr<<"Time: "<<fixed<<setprecision(5)<<chrono::duration<double, milli>(diff_time).count()<<" ms"<<endl;
-    #endif
-
-	return 0;
+    return 0;
 }
-
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>boilerplate</tabTrigger>

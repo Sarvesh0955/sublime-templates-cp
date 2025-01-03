@@ -1,0 +1,100 @@
+<snippet>
+	<content><![CDATA[
+ll power(ll a,ll b,ll mod){
+    a %= mod;
+    ll ans = 1;
+    while(b){
+        if(b&1)
+            ans= (ans * a)%mod;
+        a= (a * a)%mod;
+        b >>= 1;
+    }
+    return ans;
+}
+
+ll inv(ll b,ll mod){
+    return (power(b%mod,mod-2,mod)%mod);
+}
+
+ll div(ll a,ll b,ll mod){
+    return ((a%mod) * inv(b,mod))%mod ;
+}
+
+ll mul(ll a,ll b,ll mod){
+    return ((a%mod) * (b%mod))%mod;
+}
+
+ll add(ll a,ll b,ll mod){
+    return ((a%mod) + (b%mod))%mod;
+}
+
+ll sub(ll a,ll b,ll mod){
+    return ((a%mod) - (b%mod) + mod)%mod;
+}
+
+const int MAXN = 2e5 + 5;
+const vl M = {1000000009, 100000007};
+// mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
+// const ll P = uniform_int_distribution<ll>(0, M[0] - 1)(rng);
+const ll P = 31;
+const ll num_hash = sz(M);
+
+vvl poww(num_hash, vl(MAXN));
+vvl inv_poww(num_hash, vl(MAXN));
+
+void pre() {
+    for(ll i=0;i<num_hash;i++){
+        poww[i][0] = 1;
+        for(ll j=1;j<MAXN;j++){
+            poww[i][j] = mul(P,poww[i][j-1],M[i]);
+        }
+        
+        inv_poww[i][MAXN-1] = inv(poww[i][MAXN-1],M[i]);
+        for(ll j=MAXN-2;j>=0;j--){
+            inv_poww[i][j] = mul(inv_poww[i][j+1],P,M[i]);
+        }
+    }
+}
+
+struct StringHashing {
+    string s;
+    ll n;
+    vvl hash;
+
+    StringHashing(string &s){
+        this->s = s;
+        n = sz(s);
+        hash.resize(num_hash, vl(n));
+        
+        for(ll i=0;i<num_hash;i++){
+            for(ll j=0;j<n;j++){
+                hash[i][j] = mul((s[j]-'a'+1LL),poww[i][j],M[i]);
+                hash[i][j] = add(hash[i][j],(j>0 ? hash[i][j-1] : 0LL),M[i]);
+            }
+        }
+    }
+
+    vl substringHash(ll l, ll r) {
+        vl hsh(num_hash);
+        for(ll i=0;i<num_hash;i++){
+            ll val1 = hash[i][r];
+            ll val2 = l>0 ? hash[i][l-1] : 0LL;
+            hsh[i] = mul(sub(val1,val2,M[i]),inv_poww[i][l],M[i]);
+        }
+        return hsh;
+    }
+
+    vl getStringHash() {
+        vl hsh(num_hash);
+        for(ll i=0;i<num_hash;i++){
+            hsh[i] = hash[i][n-1];
+        }
+        return hsh;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>string_hashing2</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

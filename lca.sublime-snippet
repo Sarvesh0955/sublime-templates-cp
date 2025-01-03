@@ -1,0 +1,60 @@
+<snippet>
+	<content><![CDATA[
+struct LCA {
+    ll n;
+    vvl g;
+    ll l;
+    vvl succ;
+    vl tin,tout;
+    ll timer;
+
+    LCA(vvl &g,ll root=1) {
+        this->g = g;
+        n = sz(g)-1;
+        l = ceil(log2(n));
+        tin.resize(n+1);
+        tout.resize(n+1);
+        succ.resize(n+1,vl(l+1));
+        timer=0;
+        dfs(root,root);
+    }
+
+    void dfs(ll u,ll par){
+        tin[u] = ++timer;
+
+        succ[u][0] = par;
+        for(ll j=1;j<=l;j++){
+            succ[u][j] = succ[succ[u][j-1]][j-1];
+        }
+
+        for(auto val : g[u]){
+            if(par==val) continue;
+            dfs(val,u);
+        }
+
+        tout[u] = ++timer;
+    }  
+
+    //u ancestor of v
+    bool is_ancestor(ll u,ll v){
+        return tin[u] <= tin[v] && tout[v] <= tout[u];
+    }
+
+    ll lca(ll u,ll v){
+        if(is_ancestor(u,v))
+            return u;
+        if(is_ancestor(v,u))
+            return v;
+        for(ll j=l;j>=0;j--){
+            if(!is_ancestor(succ[u][j],v))
+                u = succ[u][j];
+        }
+        return succ[u][0];
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lca</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
