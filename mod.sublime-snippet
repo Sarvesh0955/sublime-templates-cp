@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-ll power(ll a,ll b,ll mod){
+ll power(ll a,ll b,ll mod=MOD){
     a %= mod;
     ll ans = 1;
     while(b){
@@ -12,23 +12,23 @@ ll power(ll a,ll b,ll mod){
     return ans;
 }
 
-ll inv(ll b,ll mod){
+ll inverse(ll b,ll mod=MOD){
     return (power(b%mod,mod-2,mod)%mod);
 }
 
-ll div(ll a,ll b,ll mod){
-    return ((a%mod) * inv(b,mod))%mod ;
+ll divide(ll a,ll b,ll mod=MOD){
+    return ((a%mod) * inverse(b,mod))%mod ;
 }
 
-ll mul(ll a,ll b,ll mod){
+ll multiply(ll a,ll b,ll mod=MOD){
     return ((a%mod) * (b%mod))%mod;
 }
 
-ll add(ll a,ll b,ll mod){
+ll addition(ll a,ll b,ll mod=MOD){
     return ((a%mod) + (b%mod))%mod;
 }
 
-ll sub(ll a,ll b,ll mod){
+ll subtraction(ll a,ll b,ll mod=MOD){
     return ((a%mod) - (b%mod) + mod)%mod;
 }
 

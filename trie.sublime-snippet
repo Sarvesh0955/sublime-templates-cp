@@ -1,0 +1,52 @@
+<snippet>
+	<content><![CDATA[
+struct Trie {
+    const static ll n = 26;
+    struct Node {
+        vl next;
+        ll leaf = 0;
+        Node(){
+            next.resize(n);
+            for(ll i=0;i<n;i++){
+                next[i]=-1;
+            }
+        }
+    };
+
+    vector<Node> tree;
+    
+    Trie() {
+        tree.emplace_back();
+    }
+    
+    void add(string& s) {
+        ll i=0; 
+        for(char &c : s){
+            ll idx = c-'a';
+            if(tree[i].next[idx] == -1) {
+                tree[i].next[idx] = sz(tree);
+                tree.emplace_back();
+            }
+            i = tree[i].next[idx];
+        }
+        tree[i].leaf++;
+    }
+    
+    bool search(string& s) {
+        ll i=0;
+        for(char &c : s) {
+            ll idx = c-'a';
+            if(tree[i].next[idx] == -1) {
+                return false;
+            }
+            i = tree[i].next[idx];
+        }
+        return tree[i].leaf>0;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>trie</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

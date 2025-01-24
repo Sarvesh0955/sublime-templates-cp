@@ -1,0 +1,100 @@
+<snippet>
+	<content><![CDATA[
+struct SegmentTree {
+    ll size;
+    vl arr, lazy;
+    bool hasLazy;
+    
+    SegmentTree(ll n) {
+        size = 1;
+        while(size < n) size *= 2;
+        arr.assign(2 * size, 0);
+        lazy.assign(2 * size, 0);
+        hasLazy = false;
+    }
+    
+    void propagate(ll node, ll lx, ll rx) {
+        if(!hasLazy) return;
+        if(lazy[node] != 0) {
+            arr[node] += (rx - lx) * lazy[node];
+            if(rx - lx > 1) {
+                lazy[2*node+1] += lazy[node];
+                lazy[2*node+2] += lazy[node];
+            }
+            lazy[node] = 0;
+        }
+    }
+    
+    void build(vl &a, ll node, ll lx, ll rx) {
+        if(rx-lx == 1) {
+            if(lx < sz(a)) {
+                arr[node] = a[lx];
+            }
+            return;
+        }
+        ll m = (lx+rx)/2;
+        build(a, 2*node+1, lx, m);
+        build(a, 2*node+2, m, rx);
+        arr[node] = arr[node*2+1] + arr[node*2+2];
+    }
+    
+    void build(vl &a) {
+        build(a, 0, 0, size);
+    }
+    
+    void set(ll i, ll val, ll node, ll lx, ll rx) {
+        propagate(node, lx, rx);
+        if(rx-lx == 1) {
+            arr[node] = val;
+            return;
+        }
+        ll m = (lx+rx)/2;
+        if(i < m) {
+            set(i, val, 2*node+1, lx, m);
+        } else {
+            set(i, val, 2*node+2, m, rx);
+        }
+        arr[node] = arr[2*node+1] + arr[2*node+2];
+    }
+    
+    void set(ll i, ll val) {
+        set(i, val, 0, 0, size);
+    }
+    
+    void update_range(ll l, ll r, ll val, ll node, ll lx, ll rx) {
+        propagate(node, lx, rx);
+        if(lx > r || rx-1 < l) return;
+        if(l <= lx && rx-1 <= r) {
+            lazy[node] += val;
+            propagate(node, lx, rx);
+            return;
+        }
+        ll m = (lx+rx)/2;
+        update_range(l, r, val, 2*node+1, lx, m);
+        update_range(l, r, val, 2*node+2, m, rx);
+        arr[node] = arr[2*node+1] + arr[2*node+2];
+    }
+    
+    void update_range(ll l, ll r, ll val) {
+        hasLazy = true;
+        update_range(l, r, val, 0, 0, size);
+    }
+    
+    ll range(ll l, ll r, ll node, ll lx, ll rx) {
+        propagate(node, lx, rx);
+        if(lx > r || rx-1 < l) return 0;
+        if(l <= lx && rx-1 <= r) return arr[node];
+        ll m = (lx+rx)/2;
+        return range(l, r, 2*node+1, lx, m) + range(l, r, 2*node+2, m, rx);
+    }
+    
+    ll range(ll l, ll r) {
+        return range(l, r, 0, 0, size);
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lazy</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

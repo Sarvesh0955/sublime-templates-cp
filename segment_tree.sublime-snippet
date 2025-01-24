@@ -1,5 +1,11 @@
 <snippet>
 	<content><![CDATA[
+struct Operation{
+    enum { NEUTRAL = 0};
+    static ll op(ll a, ll b) { return (a+b);}
+};
+
+template<typename Op>
 struct SegmentTree {
     ll size;
     vl arr;
@@ -9,7 +15,7 @@ struct SegmentTree {
         while(size < n){
             size *= 2;
         }
-        arr.assign(2 * size ,0);
+        arr.assign(2 * size ,Op::NEUTRAL);
     }
 
     void build(vl &a,ll node,ll lx,ll rx){
@@ -22,7 +28,7 @@ struct SegmentTree {
         ll m = (lx+rx)/2;
         build(a,2*node+1,lx,m);
         build(a,2*node+2,m,rx);
-        arr[node] = arr[node*2+1] + arr[node*2+2];
+        arr[node] = Op::op(arr[node*2+1],arr[node*2+2]);
     }
 
     void build(vl &a){
@@ -41,7 +47,7 @@ struct SegmentTree {
         else{
             set(i,val,2*node+2,m,rx);
         }
-        arr[node] = arr[2*node+1] + arr[2*node+2];
+        arr[node] = Op::op(arr[2*node+1],arr[2*node+2]);
     }
 
     void set(ll i,ll val){
@@ -49,10 +55,10 @@ struct SegmentTree {
     }
 
     ll range(ll l,ll r,ll node,ll lx,ll rx){
-        if(lx>r || rx-1<l) return 0;
+        if(lx>r || rx-1<l) return Op::NEUTRAL;
         if(l<=lx && rx-1<=r) return arr[node];
         ll m = (lx+rx)/2;
-        return range(l,r,2*node+1,lx,m)+range(l,r,2*node+2,m,rx);
+        return Op::op(range(l,r,2*node+1,lx,m),range(l,r,2*node+2,m,rx));
     }
 
     ll range(ll l,ll r){
