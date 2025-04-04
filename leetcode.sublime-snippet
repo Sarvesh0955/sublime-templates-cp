@@ -8,11 +8,8 @@ using namespace std;
 #define ull unsigned long long int
 #define ld long double
 #define pb push_back
-#define yes "YES\n"
-#define no "NO\n"
 #define umap unordered_map
 #define uset unordered_set
-#define endl "\n"
 #define ff first
 #define ss second
 #define sz(x) ((long long)(x).size())
@@ -42,6 +39,7 @@ const ll INF = LLONG_MAX;
 const ll MOD = 1e9+7;
 const ld expp = 1e-7;
 void make_unique(vl &a){sort(all(a));a.resize(unique(all(a)) - a.begin());}
+ll findMSB(ll n){return ((n==0) ? -1 : 63 - __builtin_clzll(n));}
 
 #ifndef DEBUG_TEMPLATE_CPP
 #define DEBUG_TEMPLATE_CPP
@@ -246,7 +244,7 @@ namespace __DEBUG_UTIL__
 #endif
 #endif
 
-// ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+void fastio(){ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);}
 
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->

@@ -1,0 +1,81 @@
+<snippet>
+	<content><![CDATA[
+struct XorTrie {
+    const static ll n = 2;
+    const static ll BITS= 64;
+    struct Node {
+        vl next;
+        ll leaf = 0;
+        Node(){
+            next.resize(n);
+            for(ll i=0;i<n;i++){
+                next[i]=-1;
+            }
+        }
+    };
+
+    vector<Node> tree;
+    
+    XorTrie() {
+        tree.emplace_back();
+    }
+    
+    void add(ll num) {
+        ll i=0; 
+        for(ll j=BITS-1;j>=0;j--){
+            ll idx = (num>>j)&1;
+            if(tree[i].next[idx] == -1) {
+                tree[i].next[idx] = sz(tree);
+                tree.emplace_back();
+            }
+            i = tree[i].next[idx];
+        }
+        tree[i].leaf++;
+    }
+    
+    bool search(ll num) {
+        ll i=0; 
+        for(ll j=BITS-1;j>=0;j--){
+            ll idx = (num>>j)&1;
+            if(tree[i].next[idx] == -1) {
+                return false;
+            }
+            i = tree[i].next[idx];
+        }
+        return tree[i].leaf>0;
+    }
+
+    void remove(ll num) {
+        ll i=0; 
+        for(ll j=BITS-1;j>=0;j--){
+            ll idx = (num>>j)&1;
+            if(tree[i].next[idx] == -1) {
+                return ;
+            }
+            i = tree[i].next[idx];
+        }
+        if(tree[i].leaf>0) 
+            tree[i].leaf--;
+    }
+
+    ll max_xor(ll num) {
+        ll i=0,ans=0; 
+        for(ll j=BITS-1;j>=0;j--){
+            ll idx = !((num>>j)&1);
+            if(tree[i].next[idx] == -1) {
+                i = tree[i].next[(idx==0 ? 1 : 0)];
+            }
+            else{
+                ans += (1ll<<j);
+                i = tree[i].next[idx];
+            }
+        }
+        return ans;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>xor_trie</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

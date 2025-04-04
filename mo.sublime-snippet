@@ -1,0 +1,54 @@
+<snippet>
+	<content><![CDATA[
+struct Query{
+    ll l,r,ind;
+};
+
+vector<Query> qer;
+for(ll i=0;i<q;i++){
+    ll l,r;
+    cin>>l>>r;
+    qer.push_back({--l,--r,i});
+}
+
+ll block = ceil(sqrtl(n));
+auto cmp_mo = [&](Query &a,Query &b){
+    if ((a.l/block) == (b.l/block)) 
+        return (((a.l/block)&1) ? a.r < b.r : a.r > b.r); 
+    return (a.l/block) < (b.l/block);
+};
+sort(all(qer),cmp_mo);
+
+auto remove = [&](ll ind){
+        
+};
+auto add = [&](ll ind){
+        
+};
+auto get_answer = [&](){
+    return 0;
+};
+
+vl ans(q);
+
+ll cur_l = 0;
+ll cur_r = -1;
+for(Query &q : qer){
+    while(cur_l>q.l){ add(--cur_l); }
+    while(cur_r<q.r){ add(++cur_r); }
+    while(cur_l<q.l){ remove(cur_l++); }
+    while(cur_r>q.r){ remove(cur_r--); }
+
+    ans[q.ind] = get_answer();
+}
+
+for(auto &val : ans){
+    cout<<val<<" ";
+}
+cout<<endl;
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>mo</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

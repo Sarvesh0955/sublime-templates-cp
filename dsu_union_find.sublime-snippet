@@ -1,15 +1,14 @@
 <snippet>
 	<content><![CDATA[
-struct DSU
-{
+struct DSU{
     ll n;
-    vl parent;
-    vl sizee;
+    vl par;
+    vl siz;
 
     DSU(ll n){
         this->n = n;
-        parent.resize(n+1);
-        sizee.resize(n+1);
+        par.resize(n+1);
+        siz.resize(n+1);
 
         for(ll i=1;i<=n;i++){
             make_set(i);
@@ -17,24 +16,24 @@ struct DSU
     }
     
     void make_set(ll v){
-        parent[v] = v;
-        sizee[v] = 1;
+        par[v] = v;
+        siz[v] = 1;
     }
     
-    ll find_set(ll v) {
-        if (v == parent[v])
+    ll find_set(ll v){
+        if(v==par[v])
             return v;
-        return parent[v] = find_set(parent[v]);
+        return par[v]=find_set(par[v]);
     }
     
     void union_sets(ll a,ll b){
         a = find_set(a);
         b = find_set(b);
-        if (a != b){
-            if (sizee[a] < sizee[b])
-                swap(a, b);
-            parent[b] = a;
-            sizee[a] += sizee[b];
+        if(a!=b){
+            if(siz[a]<siz[b])
+                swap(a,b);
+            par[b] = a;
+            siz[a] += siz[b];
         }
     }
 };

@@ -1,0 +1,148 @@
+<snippet>
+	<content><![CDATA[
+struct Node {
+    ll val;
+    ll height;
+    Node *left, *right;
+    Node(ll x) : val(x), height(1), left(nullptr), right(nullptr) {}
+};
+
+struct AVL {
+    Node* root;
+    AVL() : root(nullptr) {}
+    
+    ll getheight(Node* node) {
+        return node ? node->height : 0;
+    }
+    
+    ll getBalanceFactor(Node* node) {
+        return getheight(node->right) - getheight(node->left);
+    }
+    
+    void updateheight(Node* node) {
+        node->height = 1 + max(getheight(node->left), getheight(node->right));
+    }
+    
+    Node* rotateRight(Node* y) {
+        Node* x = y->left;
+        Node* temp = x->right;
+        x->right = y;
+        y->left = temp;
+        updateheight(y);
+        updateheight(x);
+        return x;
+    }
+    
+    Node* rotateLeft(Node* x) {
+        Node* y = x->right;
+        Node* temp = y->left;
+        y->left = x;
+        x->right = temp;
+        updateheight(x);
+        updateheight(y);
+        return y;
+    }
+    
+    Node* insertNode(Node* node, ll x) {
+        if (!node) return new Node(x);
+        
+        if (x < node->val) node->left = insertNode(node->left, x);
+        else if (x > node->val) node->right = insertNode(node->right, x);
+        else return node;
+        
+        updateheight(node);
+        ll balanceFactor = getBalanceFactor(node);
+        
+        if (balanceFactor < -1 && x < node->left->val)
+            return rotateRight(node);
+        
+        if (balanceFactor > 1 && x > node->right->val)
+            return rotateLeft(node);
+        
+        if (balanceFactor < -1 && x > node->left->val) {
+            node->left = rotateLeft(node->left);
+            return rotateRight(node);
+        }
+        
+        if (balanceFactor > 1 && x < node->right->val) {
+            node->right = rotateRight(node->right);
+            return rotateLeft(node);
+        }
+        
+        return node;
+    }
+    
+    void insert(ll x) {
+        root = insertNode(root, x);
+    }
+    
+    Node* getMinvalNode(Node* node) {
+        return node->left ? getMinvalNode(node->left) : node;
+    }
+    
+    Node* deleteNode(Node* node, ll x) {
+        if (!node) return nullptr;
+        
+        if (x < node->val) node->left = deleteNode(node->left, x);
+        else if (x > node->val) node->right = deleteNode(node->right, x);
+        else {
+            if (!node->left || !node->right) {
+                Node* temp = node->left ? node->left : node->right;
+                if (!temp) {
+                    temp = node;
+                    node = nullptr;
+                } else *node = *temp;
+                delete temp;
+            } else {
+                Node* temp = getMinvalNode(node->right);
+                node->val = temp->val;
+                node->right = deleteNode(node->right, temp->val);
+            }
+        }
+        
+        if (!node) return nullptr;
+        
+        updateheight(node);
+        ll balanceFactor = getBalanceFactor(node);
+        
+        if (balanceFactor < -1 && getBalanceFactor(node->left) <= 0)
+            return rotateRight(node);
+            
+        if (balanceFactor < -1 && getBalanceFactor(node->left) > 0) {
+            node->left = rotateLeft(node->left);
+            return rotateRight(node);
+        }
+        
+        if (balanceFactor > 1 && getBalanceFactor(node->right) >= 0)
+            return rotateLeft(node);
+            
+        if (balanceFactor > 1 && getBalanceFactor(node->right) < 0) {
+            node->right = rotateRight(node->right);
+            return rotateLeft(node);
+        }
+        
+        return node;
+    }
+    
+    void remove(ll x) {
+        root = deleteNode(root, x);
+    }
+    
+    void inorderTraversal(Node* node) {
+        if (!node) return;
+        inorderTraversal(node->left);
+        cout << node->val << " ";
+        inorderTraversal(node->right);
+    }
+    
+    void printInorder() {
+        inorderTraversal(root);
+        cout << endl;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>avl_tree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

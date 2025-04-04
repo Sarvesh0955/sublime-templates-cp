@@ -24,11 +24,11 @@ ll multiply(ll a,ll b,ll mod=MOD){
     return ((a%mod) * (b%mod))%mod;
 }
 
-ll addition(ll a,ll b,ll mod=MOD){
+ll add(ll a,ll b,ll mod=MOD){
     return ((a%mod) + (b%mod))%mod;
 }
 
-ll subtraction(ll a,ll b,ll mod=MOD){
+ll subtract(ll a,ll b,ll mod=MOD){
     return ((a%mod) - (b%mod) + mod)%mod;
 }
 

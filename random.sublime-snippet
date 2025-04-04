@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+ll random() {
+    static std::mt19937 gen(std::chrono::steady_clock::now().time_since_epoch().count());
+    return std::uniform_int_distribution<long long>(0, INT64_MAX)(gen);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>random</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -2,9 +2,14 @@
 	<content><![CDATA[
 #include<ext/pb_ds/assoc_container.hpp>
 using namespace __gnu_pbds;
-typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> indexed_set;
-// find_by_order, order_of_key --> O(logn)
-
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
+// 0 based indexing O(logn)
+// find_by_order 
+//    ==> access set as array
+//    ==> iterator (outside range --> .end())
+// order_of_key O(logn)
+//    ==> number of elements in the set that are strictly less than x
+//    ==> int
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>Ordered_set</tabTrigger>

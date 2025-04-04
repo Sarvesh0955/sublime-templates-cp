@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
 const ll PMAX=1e6+10;
-vl hp(PMAX,0);
+vl hp(PMAX,1);
 void primeseive() {
     for(ll i=2;i<PMAX;i++){
-        if(hp[i]==0){             
+        if(hp[i]==1){             
             for(ll j=i;j<PMAX;j+=i){
                 hp[j] = i;
             }
@@ -13,10 +13,12 @@ void primeseive() {
 }
  
 vl factors(ll x) {
+    if(x<=0)
+        return {-1};
     vl ret;
     ll last=-1;
     while (x != 1){
-        if(hp[x]!=last)
+        // if(hp[x]!=last)
         ret.pb(hp[x]);
         last=hp[x];
         x = x / hp[x];

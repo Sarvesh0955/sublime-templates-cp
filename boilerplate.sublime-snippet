@@ -8,8 +8,8 @@ using namespace std;
 #define ull unsigned long long int
 #define ld long double
 #define pb push_back
-#define yes "YES\n"
-#define no "NO\n"
+#define yes "Yes\n"
+#define no "No\n"
 #define umap unordered_map
 #define uset unordered_set
 #define endl "\n"
@@ -42,9 +42,10 @@ const ll INF = LLONG_MAX;
 const ll MOD = 1e9+7;
 const ld expp = 1e-7;
 void make_unique(vl &a){sort(all(a));a.resize(unique(all(a)) - a.begin());}
+ll findMSB(ll n){return ((n==0) ? -1 : 63 - __builtin_clzll(n));}
 
 #ifndef ONLINE_JUDGE
-#include "./template.cpp"
+#include "./debug.cpp"
 #else
 #define debug(...)
 #define debugArr(...)
