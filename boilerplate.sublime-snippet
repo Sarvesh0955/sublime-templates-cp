@@ -51,6 +51,8 @@ ll findMSB(ll n){return ((n==0) ? -1 : 63 - __builtin_clzll(n));}
 #define debugArr(...)
 #endif
 
+void precompute(){}
+
 void solve()
 {
     $1
@@ -61,6 +63,7 @@ int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     
+    precompute();
     int T=1;
     cin>>T;
     while(T--)

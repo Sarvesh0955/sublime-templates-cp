@@ -36,6 +36,10 @@ struct DSU{
             siz[a] += siz[b];
         }
     }
+
+    ll set_size(ll a){
+        return siz[find_set(a)];
+    }
 };
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
